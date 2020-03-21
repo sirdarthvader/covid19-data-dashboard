@@ -61,7 +61,6 @@ export default class App extends Component {
   };
 
   render() {
-    // const { all } = this.state;
     return (
       <div className="App">
         <Header changeView={this._changeView} />

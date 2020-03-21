@@ -49,6 +49,16 @@ class Header extends Component {
           >
             <div className="link">News</div>
           </div>
+          <div
+            className={
+              currentView === "other"
+                ? "yellow-background nav-link"
+                : "nav-link"
+            }
+            onClick={() => this._changeTabs("other")}
+          >
+            <div className="link">Links</div>
+          </div>
         </div>
       </div>
     );
