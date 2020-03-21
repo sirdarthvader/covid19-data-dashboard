@@ -10,7 +10,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: "",
+      currentView: "stats",
       all: {},
       countries: {},
       individualCountry: {},
@@ -34,7 +34,7 @@ export default class App extends Component {
    * actual function call to get data from open API.
    */
   _getAllCountryData = () => {
-    //get alll the country data at once
+    // ? get alll the country data at once
   };
 
   /**
