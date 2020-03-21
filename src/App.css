@@ -1,33 +1,61 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #002b36;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
 .App {
+  height: 100%;
+  width: 100%;
+  color: #7d99a3;
   text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-style: italic;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.website-builder {
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.red {
+  color: #dc143c;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.green {
+  color: #2aa198;
 }
 
-.App-link {
-  color: #61dafb;
+.dark-green {
+  color: #073642;
 }
 
+.dark-green-page {
+  background-color: #073642;
+}
+
+.darkest-green {
+  color: #011c23;
+}
+
+.dark-green-bg {
+  background-color: #011c23;
+}
+
+.yellow {
+  color: #b58900;
+}
+
+.yellow-background {
+  background-color: #b58900;
+  color: #ffffff !important;
+}
+
+/* spining code  */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
