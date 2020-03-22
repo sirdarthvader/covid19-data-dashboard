@@ -1,16 +1,37 @@
 import React, { Component } from "react";
 import "./Header.css";
 
-export default class Header_ extends Component {
+export default class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      current: "home"
+    };
   }
 
+  /**
+   * Helper for changing tabs
+   * @param {*} tab provide name of tab for navigation,
+   * same will be passed back to parent component
+   */
+  changeTabs = tab => {
+    this.setState(
+      {
+        current: tab
+      },
+      () => {
+        this.props.getCurrentTab(tab);
+      }
+    );
+  };
+
+  changeTabs;
+
   render() {
+    const { current } = this.state;
     return (
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark covid-custom-navbar">
-        <div className="navbar-brand">
+        <div className="navbar-brand" onClick={() => this.changeTabs("home")}>
           <span className="green">
             COVID<span className="red"> 19</span>
           </span>
@@ -29,15 +50,17 @@ export default class Header_ extends Component {
 
         <div className="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <div className="nav-link" href="#">
-                Home <span className="sr-only">(current)</span>
-              </div>
+            <li
+              className={current === "india" ? "nav-item active" : "nav-item"}
+              onClick={() => this.changeTabs("india")}
+            >
+              <div className="nav-link">India</div>
             </li>
-            <li className="nav-item">
-              <div className="nav-link" href="#">
-                Link
-              </div>
+            <li
+              className={current === "world" ? "nav-item active" : "nav-item"}
+              onClick={() => this.changeTabs("world")}
+            >
+              <div className="nav-link">World</div>
             </li>
             <li className="nav-item dropdown">
               <div
@@ -52,13 +75,13 @@ export default class Header_ extends Component {
               </div>
               <div className="dropdown-menu" aria-labelledby="dropdown01">
                 <div className="dropdown-item" href="#">
-                  Action
+                  Data Source
                 </div>
                 <div className="dropdown-item" href="#">
-                  Another action
+                  <span className="pink">Coming Soon!</span>
                 </div>
                 <div className="dropdown-item" href="#">
-                  Something else here
+                  About
                 </div>
               </div>
             </li>

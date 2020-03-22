@@ -41,6 +41,7 @@
 .navbar-brand {
   text-decoration: line-through;
   color: #b58900 !important;
+  cursor: pointer !important;
 }
 
 .covid-custom-navbar,

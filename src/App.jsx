@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import Header from "./Components/Header/Header";
-import Footer from "./Components/Footer/Footer";
 import Jumbotron from "./Components/Jumbotron/Jumbotron";
+import India from "./Components/India/India";
 
 export default class App extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ export default class App extends Component {
     this.state = {
       hasError: false,
       loading: true,
-      currentView: "stats",
+      currentView: "home",
       all: {},
       countries: {},
       individualCountry: {},
@@ -32,24 +32,6 @@ export default class App extends Component {
    */
   _getAllCountryData = () => {
     // ? get alll the country data at once
-    fetch("https://corona.lmao.ninja/all")
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            all: result
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        error => {
-          this.setState({
-            hasError: true,
-            error
-          });
-        }
-      );
   };
 
   /**
@@ -67,22 +49,26 @@ export default class App extends Component {
   };
 
   /**
-   * Helper to change view or tab
+   * Helper to get current selected tab from navbar
    */
-  _changeView = tab => {
+  _getCurrentTab = tab => {
     this.setState({
       currentView: tab
     });
   };
 
   render() {
+    const { currentView } = this.state;
     return (
       <div className="App">
-        <Header changeView={this._changeView} />
+        <Header getCurrentTab={this._getCurrentTab} />
         <main className="main">
-          <Jumbotron />
+          {currentView === "home" ? (
+            <Jumbotron />
+          ) : currentView === "india" ? (
+            <India />
+          ) : null}
         </main>
-        <Footer />
       </div>
     );
   }

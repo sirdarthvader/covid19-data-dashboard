@@ -19,9 +19,9 @@ body {
   font-style: italic;
 }
 
-/* .main {
-  margin-top: 56px;
-} */
+.main {
+  padding-top: 56px;
+}
 
 .underline {
   text-decoration: underline;
