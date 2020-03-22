@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import PulseLoader from "../PulseLoader/PulseLoader";
-import Card from "../Card/Card";
+import Content from "../Content/Content";
 
 export default class India extends Component {
   constructor(props) {
@@ -44,12 +43,10 @@ export default class India extends Component {
       let currObj = {};
       currObj[key] = value;
       dataArr.push(currObj);
-      // console.log(`${key}: ${value}`);
     }
-    console.log(dataArr);
     this.setState({
-      arrangedData: dataArr,
-      loading: false
+      arrangedData: dataArr
+      // loading: false
     });
   };
 
@@ -79,63 +76,19 @@ export default class India extends Component {
   };
 
   render() {
-    const { loading } = this.state;
+    const { loading, data } = this.state;
     return (
-      <div className="container-fluid" style={{}}>
-        {loading ? (
-          <PulseLoader />
-        ) : (
-          <div
-            className="summary"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center"
-            }}
-          >
-            <Card
-              header={"Total"}
-              key={1}
-              color={"primary"}
-              value={this.state.data.cases}
-              total={this.state.data.cases}
-            />
-            <Card
-              header={"Active"}
-              key={2}
-              color={"orange"}
-              value={this.state.data.active}
-              total={this.state.data.cases}
-            />
-            <Card
-              header={"Death"}
-              key={3}
-              color={"death"}
-              value={this.state.data.deaths}
-              total={this.state.data.cases}
-            />
-            <Card
-              header={"Recovered"}
-              key={4}
-              color={"green"}
-              value={this.state.data.recovered}
-              total={this.state.data.cases}
-            />
-            <Card
-              header={"Critical"}
-              key={"orange"}
-              value={this.state.data.critical}
-              total={this.state.data.cases}
-            />
-
-            {/* <Card
-              header={"Case Per One Million"}
-              key={"orange"}
-              value={this.state.data.casesPerOneMillion}
-              total={this.state.data.cases}
-            /> */}
-          </div>
-        )}
+      <div className="container-fluid">
+        <div
+          className="summary"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center"
+          }}
+        >
+          <Content loading={loading} data={data} />
+        </div>
       </div>
     );
   }

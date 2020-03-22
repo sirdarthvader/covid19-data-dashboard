@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Content.css";
-// import Main from "../Main/Stats";
+import Card from "../Card/Card";
 
 class Content extends Component {
   constructor(props) {
@@ -8,19 +8,50 @@ class Content extends Component {
     this.state = {};
   }
   render() {
-    let { currentView } = this.props;
+    let { loading, data } = this.props;
     return (
-      <div className="main-content">
-        {currentView === "stats" ? (
-          <div className="statistics">
-            <h2>This is the statistics page.</h2>
-          </div>
-        ) : (
-          <div className="news">
-            <h4>He is always the bearer of sad news.</h4>
-          </div>
-        )}
-      </div>
+      <>
+        <Card
+          header={"Total"}
+          color={"primary"}
+          key={1}
+          dataLoading={loading}
+          value={data.cases}
+          total={data.cases}
+        />
+        <Card
+          header={"Active"}
+          color={"orange"}
+          key={2}
+          dataLoading={loading}
+          value={data.active}
+          total={data.cases}
+        />
+        <Card
+          header={"Death"}
+          color={"death"}
+          key={3}
+          dataLoading={loading}
+          value={data.deaths}
+          total={data.cases}
+        />
+        <Card
+          header={"Recovered"}
+          color={"green"}
+          key={4}
+          dataLoading={loading}
+          value={data.recovered}
+          total={data.cases}
+        />
+        <Card
+          header={"Critical"}
+          color={"hotpink"}
+          key={5}
+          dataLoading={loading}
+          value={data.critical}
+          total={data.cases}
+        />
+      </>
     );
   }
 }

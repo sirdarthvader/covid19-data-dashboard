@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import Jumbotron from "./Components/Jumbotron/Jumbotron";
 import India from "./Components/India/India";
+import World from "./Components/World/World";
 
 export default class App extends Component {
   constructor(props) {
@@ -47,6 +48,8 @@ export default class App extends Component {
             <Jumbotron />
           ) : currentView === "india" ? (
             <India closeNav={this._closeNav} />
+          ) : currentView === "world" ? (
+            <World closeNav={this._closeNav} />
           ) : null}
         </main>
       </div>
