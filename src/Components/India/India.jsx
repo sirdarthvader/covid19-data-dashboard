@@ -45,8 +45,8 @@ export default class India extends Component {
       dataArr.push(currObj);
     }
     this.setState({
-      arrangedData: dataArr
-      // loading: false
+      arrangedData: dataArr,
+      loading: false
     });
   };
 

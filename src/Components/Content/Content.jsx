@@ -57,7 +57,7 @@ class Content extends Component {
           <Card
             header={"Today Deaths"}
             color={"red"}
-            key={5}
+            key={6}
             dataLoading={loading}
             value={data.todayDeaths}
             total={data.cases}
@@ -68,7 +68,7 @@ class Content extends Component {
           <Card
             header={"Critical"}
             color={"hotpink"}
-            key={6}
+            key={7}
             dataLoading={loading}
             value={data.critical}
             total={data.cases}

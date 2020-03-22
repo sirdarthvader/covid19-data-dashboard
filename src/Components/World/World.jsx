@@ -73,8 +73,8 @@ class World extends Component {
       .then(
         result => {
           this.setState({
-            data: result
-            // loading: false
+            data: result,
+            loading: false
           });
         },
         //check for errors
@@ -97,8 +97,8 @@ class World extends Component {
       .then(
         result => {
           this.setState({
-            worldData: result
-            // loading: false
+            worldData: result,
+            loading: false
           });
         },
         //check for errors
