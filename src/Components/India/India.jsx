@@ -77,6 +77,7 @@ export default class India extends Component {
 
   render() {
     const { loading, data } = this.state;
+    const { lastUpdated } = this.props;
     return (
       <div className="container-fluid">
         {loading ? (
@@ -84,6 +85,10 @@ export default class India extends Component {
             All Good and Bad things take time....
           </div>
         ) : null}
+        <div className="last-updated">
+          Last Data Update:{" "}
+          <strong className="yellow-background"> {lastUpdated}</strong>
+        </div>
         <div
           className="summary"
           style={{

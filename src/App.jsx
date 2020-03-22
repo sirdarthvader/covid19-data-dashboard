@@ -4,6 +4,9 @@ import Header from "./Components/Header/Header";
 import Jumbotron from "./Components/Jumbotron/Jumbotron";
 import India from "./Components/India/India";
 import World from "./Components/World/World";
+import Datasource from "./Components/Datasource/Datasource";
+import About from "./Components/About/About";
+import Upcoming from "./Components/Upcoming/Upcoming";
 
 export default class App extends Component {
   constructor(props) {
@@ -13,19 +16,29 @@ export default class App extends Component {
       loading: true,
       error: {},
       currentView: "home",
+      worldData: null,
+      lastUpdated: "",
       allCountryData: [],
       listOfCountries: []
     };
   }
 
   componentDidMount() {
+    this._getWorldData();
     this._getAllCountryData();
   }
 
   componentDidUpdate(prevProps, prevState) {
+    //check for all change country data
     if (prevState.allCountryData !== this.state.allCountryData) {
       if (this.state.allCountryData.length) {
         this._listCountries(this.state.allCountryData);
+      }
+    }
+    //check for change in world data
+    if (prevState.worldData !== this.state.worldData) {
+      if (this.state.worldData !== null) {
+        this._getLastUpdatedTime(this.state.worldData);
       }
     }
   }
@@ -94,8 +107,52 @@ export default class App extends Component {
       );
   };
 
+  /**
+   *  @description Get all country data as a fallback
+   */
+  _getWorldData = () => {
+    fetch(`https://corona.lmao.ninja/all`)
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            worldData: result,
+            loading: false
+          });
+        },
+        //check for errors
+        error => {
+          this.setState({
+            loading: false,
+            hasError: true,
+            error
+          });
+        }
+      );
+  };
+
+  /**
+   * Helper to get last updated time
+   * @param {dateObject} dateobject returned by API
+   */
+  _getLastUpdatedTime = data => {
+    let today = new Date(data.updated);
+    let date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    let time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date + " " + time;
+    this.setState({
+      lastUpdated: dateTime
+    });
+  };
+
   render() {
-    const { currentView, listOfCountries } = this.state;
+    const { currentView, listOfCountries, worldData, lastUpdated } = this.state;
     return (
       <div className="App">
         <Header getCurrentTab={this._getCurrentTab} />
@@ -103,12 +160,20 @@ export default class App extends Component {
           {currentView === "home" ? (
             <Jumbotron />
           ) : currentView === "india" ? (
-            <India closeNav={this._closeNav} />
+            <India closeNav={this._closeNav} lastUpdated={lastUpdated} />
           ) : currentView === "world" ? (
             <World
               closeNav={this._closeNav}
               listOfCountries={listOfCountries}
+              worldData={worldData}
+              lastUpdated={lastUpdated}
             />
+          ) : currentView === "source" ? (
+            <Datasource closeNav={this._closeNav} />
+          ) : currentView === "about" ? (
+            <About closeNav={this._closeNav} />
+          ) : currentView === "upcoming" ? (
+            <Upcoming closeNav={this._closeNav} />
           ) : null}
         </main>
       </div>

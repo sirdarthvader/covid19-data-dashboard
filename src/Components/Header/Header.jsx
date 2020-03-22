@@ -63,28 +63,25 @@ export default class Header extends Component {
             >
               <div className="nav-link">World</div>
             </li>
-            <li className="nav-item dropdown">
-              <div
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="dropdown01"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropdown
-              </div>
-              <div className="dropdown-menu" aria-labelledby="dropdown01">
-                <div className="dropdown-item" href="#">
-                  Data Source
-                </div>
-                <div className="dropdown-item" href="#">
-                  <span className="pink">Coming Soon!</span>
-                </div>
-                <div className="dropdown-item" href="#">
-                  About
-                </div>
-              </div>
+            <li
+              className={current === "source" ? "nav-item active" : "nav-item"}
+              onClick={() => this.changeTabs("source")}
+            >
+              <div className="nav-link">Source</div>
+            </li>
+            <li
+              className={
+                current === "upcoming" ? "nav-item active" : "nav-item"
+              }
+              onClick={() => this.changeTabs("upcoming")}
+            >
+              <div className="nav-link">Upcoming!!</div>
+            </li>
+            <li
+              className={current === "about" ? "nav-item active" : "nav-item"}
+              onClick={() => this.changeTabs("about")}
+            >
+              <div className="nav-link">About</div>
             </li>
           </ul>
         </div>

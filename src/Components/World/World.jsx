@@ -8,49 +8,31 @@ class World extends Component {
     super(props);
     this.state = {
       country: "",
-      loading: true,
+      loading: false,
       hasError: false,
       error: null,
       data: null,
-      worldData: null,
       lastUpdated: ""
     };
   }
 
   componentDidMount() {
     this.props.closeNav();
-    this._getWorldData();
   }
 
   componentDidUpdate(prevProps, prevState) {
+    //check for change in selected country
     if (prevState.country !== this.state.country) {
       this._getData(this.state.country);
     }
-    if (prevState.worldData !== this.state.worldData) {
-      if (this.state.worldData !== null) {
-        this._getLastUpdatedTime(this.state.worldData);
-      }
+
+    //check for change in coming api data
+    if (prevProps.worldData !== this.props.worldData) {
+      this.setState({
+        loading: false
+      });
     }
   }
-
-  /**
-   * Helper to get last updated time
-   */
-  _getLastUpdatedTime = data => {
-    let today = new Date(data.updated);
-    let date =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
-    let time =
-      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = date + " " + time;
-    this.setState({
-      lastUpdated: dateTime
-    });
-  };
 
   /**
    * @description Helper to set local state with state value
@@ -88,33 +70,9 @@ class World extends Component {
       );
   };
 
-  /**
-   *  @description Get all country data as a fallback
-   */
-  _getWorldData = () => {
-    fetch(`https://corona.lmao.ninja/all`)
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            worldData: result,
-            loading: false
-          });
-        },
-        //check for errors
-        error => {
-          this.setState({
-            loading: false,
-            hasError: true,
-            error
-          });
-        }
-      );
-  };
-
   render() {
-    const { loading, data, worldData, lastUpdated } = this.state;
-    const { listOfCountries } = this.props;
+    const { loading, data } = this.state;
+    const { listOfCountries, worldData, lastUpdated } = this.props;
 
     return (
       <div className="container-fluid">
@@ -139,10 +97,11 @@ class World extends Component {
                     ))
                   : null}
               </select>
-              <div className="last-updated">
-                Last Data Update: <strong>{lastUpdated}</strong>
-              </div>
             </div>
+          </div>
+          <div className="last-updated">
+            Last Data Update:{" "}
+            <strong className="yellow-background"> {lastUpdated}</strong>
           </div>
           <div
             className="country-data"
@@ -156,7 +115,7 @@ class World extends Component {
             <>
               {this.state.data !== null ? (
                 <Content loading={loading} data={data} />
-              ) : this.state.worldData !== null ? (
+              ) : this.props.worldData !== null ? (
                 <Content loading={loading} data={worldData} />
               ) : (
                 <div

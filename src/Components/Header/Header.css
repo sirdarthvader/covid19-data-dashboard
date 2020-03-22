@@ -44,6 +44,11 @@
   cursor: pointer !important;
 }
 
+.active {
+  background-color: #b58900;
+  color: #ffffff;
+}
+
 .covid-custom-navbar,
 .sticky-footer {
   background: linear-gradient(to right, #013948, #011c23);
