@@ -18,14 +18,14 @@ class PulseLoader extends Component {
   render() {
     let height = this.props.height || "15px";
     let width = this.props.width || "";
-    let margin = this.props.margin || "0";
+    let mr = this.props.mr || "0";
     return (
       <div
         className="pulse-loader-animation"
         style={{
           height: `${height}`,
           width: `${width === "" ? null : width}`,
-          margin: `${margin}`
+          marginRight: `${mr}`
         }}
       ></div>
     );

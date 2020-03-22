@@ -43,11 +43,32 @@ class Content extends Component {
           value={data.recovered}
           total={data.cases}
         />
+        {data.todayCases ? (
+          <Card
+            header={"Today Cases"}
+            color={"red"}
+            key={5}
+            dataLoading={loading}
+            value={data.todayCases}
+            total={data.cases}
+          />
+        ) : null}
+        {data.todayDeaths ? (
+          <Card
+            header={"Today Deaths"}
+            color={"red"}
+            key={5}
+            dataLoading={loading}
+            value={data.todayDeaths}
+            total={data.cases}
+          />
+        ) : null}
+
         {data.critical ? (
           <Card
             header={"Critical"}
             color={"hotpink"}
-            key={5}
+            key={6}
             dataLoading={loading}
             value={data.critical}
             total={data.cases}

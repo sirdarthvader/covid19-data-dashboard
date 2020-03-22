@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import Content from "../Content/Content";
+import PulseLoader from "../PulseLoader/PulseLoader";
 
 class World extends Component {
   constructor(props) {
@@ -58,7 +59,8 @@ class World extends Component {
   onStateSelect = () => {
     let country = document.getElementById("sel-cnt").value;
     this.setState({
-      country
+      country,
+      loading: true
     });
   };
 
@@ -71,8 +73,8 @@ class World extends Component {
       .then(
         result => {
           this.setState({
-            data: result,
-            loading: false
+            data: result
+            // loading: false
           });
         },
         //check for errors
@@ -95,8 +97,8 @@ class World extends Component {
       .then(
         result => {
           this.setState({
-            worldData: result,
-            loading: false
+            worldData: result
+            // loading: false
           });
         },
         //check for errors
@@ -156,7 +158,32 @@ class World extends Component {
                 <Content loading={loading} data={data} />
               ) : this.state.worldData !== null ? (
                 <Content loading={loading} data={worldData} />
-              ) : null}
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%"
+                  }}
+                >
+                  <div className="first yellow-background">
+                    All Good and Bad things take time....
+                  </div>
+                  <div
+                    className="second"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "100%"
+                    }}
+                  >
+                    <PulseLoader width={"200px"} height={"200px"} mr={"20px"} />
+                    <PulseLoader width={"200px"} height={"200px"} mr={"20px"} />
+                  </div>
+                </div>
+              )}
             </>
           </div>
         </div>

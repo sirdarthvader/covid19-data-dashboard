@@ -45,8 +45,8 @@ export default class India extends Component {
       dataArr.push(currObj);
     }
     this.setState({
-      arrangedData: dataArr,
-      loading: false
+      arrangedData: dataArr
+      // loading: false
     });
   };
 
@@ -79,12 +79,18 @@ export default class India extends Component {
     const { loading, data } = this.state;
     return (
       <div className="container-fluid">
+        {loading ? (
+          <div className="yellow-background">
+            All Good and Bad things take time....
+          </div>
+        ) : null}
         <div
           className="summary"
           style={{
             display: "flex",
             flexWrap: "wrap",
-            justifyContent: "center"
+            justifyContent: "center",
+            marginTop: "50px"
           }}
         >
           <Content loading={loading} data={data} />
