@@ -23,6 +23,15 @@ body {
   padding-top: 56px;
 }
 
+.card {
+  background-color: #073642 !important;
+}
+
+.card-header {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
 .underline {
   text-decoration: underline;
 }
