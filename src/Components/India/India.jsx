@@ -31,6 +31,7 @@ export default class India extends Component {
    */
   componentDidMount() {
     this._getData();
+    this.props.closeNav();
   }
 
   /**
@@ -80,7 +81,7 @@ export default class India extends Component {
   render() {
     const { loading } = this.state;
     return (
-      <div className="container" style={{}}>
+      <div className="container-fluid" style={{}}>
         {loading ? (
           <PulseLoader />
         ) : (
@@ -95,34 +96,44 @@ export default class India extends Component {
             <Card
               header={"Total"}
               key={1}
-              bg={"bg-light"}
+              color={"primary"}
               value={this.state.data.cases}
               total={this.state.data.cases}
             />
             <Card
               header={"Active"}
               key={2}
+              color={"orange"}
               value={this.state.data.active}
               total={this.state.data.cases}
             />
             <Card
               header={"Death"}
               key={3}
+              color={"death"}
               value={this.state.data.deaths}
               total={this.state.data.cases}
             />
             <Card
               header={"Recovered"}
               key={4}
+              color={"green"}
               value={this.state.data.recovered}
               total={this.state.data.cases}
             />
             <Card
-              header={"Recovered"}
-              key={5}
-              value={this.state.data.recovered}
+              header={"Critical"}
+              key={"orange"}
+              value={this.state.data.critical}
               total={this.state.data.cases}
             />
+
+            {/* <Card
+              header={"Case Per One Million"}
+              key={"orange"}
+              value={this.state.data.casesPerOneMillion}
+              total={this.state.data.cases}
+            /> */}
           </div>
         )}
       </div>

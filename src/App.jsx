@@ -18,43 +18,23 @@ export default class App extends Component {
     };
   }
 
-  componentDidMount() {}
-
   /**
-   * Function to call data for a specific country
-   */
-  _getCountryData = id => {
-    // get data to call and get data for any specific country
-  };
-
-  /**
-   * actual function call to get data from open API.
-   */
-  _getAllCountryData = () => {
-    // ? get alll the country data at once
-  };
-
-  /**
-   * Get country level news
-   */
-  _getCountryNews = id => {
-    //get country specific data
-  };
-
-  /**
-   * Get all global news data
-   */
-  _getGlobalNews = id => {
-    //Get all global level news data
-  };
-
-  /**
-   * Helper to get current selected tab from navbar
+   * @description Helper to get current selected tab from navbar
+   * @param {*} tab current screen to be viewed
    */
   _getCurrentTab = tab => {
     this.setState({
       currentView: tab
     });
+  };
+
+  /**
+   * @description check if the responsive navbar is switched visible,
+   *  if it is then find it and close it.
+   */
+  _closeNav = () => {
+    let toggler = document.getElementById("res-mob-tog");
+    toggler.click();
   };
 
   render() {
@@ -66,7 +46,7 @@ export default class App extends Component {
           {currentView === "home" ? (
             <Jumbotron />
           ) : currentView === "india" ? (
-            <India />
+            <India closeNav={this._closeNav} />
           ) : null}
         </main>
       </div>

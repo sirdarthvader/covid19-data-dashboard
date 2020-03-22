@@ -43,6 +43,17 @@ body {
 .pink {
   color: #d33682;
 }
+.primary {
+  color: dodgerblue;
+}
+
+.death {
+  color: crimson;
+}
+
+.orange {
+  color: orange;
+}
 
 .green {
   color: #2aa198;

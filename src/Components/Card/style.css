@@ -1,0 +1,15 @@
+.card-body {
+  display: flex;
+  align-items: flex-end;
+}
+
+.card-value {
+  margin-right: 10px;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.card-percentage {
+  width: 60%;
+  font-size: 12px;
+}

@@ -38,6 +38,7 @@ export default class Header extends Component {
         </div>
         <button
           className="navbar-toggler"
+          id="res-mob-tog"
           type="button"
           data-toggle="collapse"
           data-target="#navbarsExampleDefault"
