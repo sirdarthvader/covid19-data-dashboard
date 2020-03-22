@@ -3,7 +3,11 @@ import "./Footer.css";
 
 class Footer extends Component {
   render() {
-    return <div></div>;
+    return (
+      <footer class="container-fluid sticky-footer">
+        <p className="footer-text">Created By Ashish</p>
+      </footer>
+    );
   }
 }
 

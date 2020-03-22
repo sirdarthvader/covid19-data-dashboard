@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
 import Header from "./Components/Header/Header";
-import Content from "./Components/Content/Content";
 import Footer from "./Components/Footer/Footer";
-// import { config } from "./config";
-// const { PRIMARY, SECONDARY } = config;
+import Jumbotron from "./Components/Jumbotron/Jumbotron";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      hasError: false,
+      loading: true,
       currentView: "stats",
       all: {},
       countries: {},
@@ -18,10 +18,7 @@ export default class App extends Component {
     };
   }
 
-  componentDidMount() {
-    //call function to fetch data for overall world data
-    this._getAllCountryData();
-  }
+  componentDidMount() {}
 
   /**
    * Function to call data for a specific country
@@ -35,6 +32,24 @@ export default class App extends Component {
    */
   _getAllCountryData = () => {
     // ? get alll the country data at once
+    fetch("https://corona.lmao.ninja/all")
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            all: result
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        error => {
+          this.setState({
+            hasError: true,
+            error
+          });
+        }
+      );
   };
 
   /**
@@ -64,7 +79,9 @@ export default class App extends Component {
     return (
       <div className="App">
         <Header changeView={this._changeView} />
-        <Content currentView={this.state.currentView} />
+        <main className="main">
+          <Jumbotron />
+        </main>
         <Footer />
       </div>
     );

@@ -3,6 +3,7 @@ body {
   height: 100%;
   width: 100%;
   background-color: #002b36;
+  padding-top: 0.5rem;
 }
 
 #root {
@@ -14,16 +15,24 @@ body {
   height: 100%;
   width: 100%;
   color: #7d99a3;
-  text-align: center;
   font-family: "IBM Plex Mono", monospace;
   font-style: italic;
 }
 
-.website-builder {
+/* .main {
+  margin-top: 56px;
+} */
+
+.underline {
+  text-decoration: underline;
 }
 
 .red {
   color: #dc143c;
+}
+
+.pink {
+  color: #d33682;
 }
 
 .green {
@@ -50,9 +59,17 @@ body {
   color: #b58900;
 }
 
+.jumbotron {
+  background-color: #002b36;
+}
+
 .yellow-background {
   background-color: #b58900;
   color: #ffffff !important;
+}
+
+.h6 {
+  font-size: 0.8rem;
 }
 
 /* spining code  */
