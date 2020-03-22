@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import COUNTRIES from "../Data/data.json";
 import "./style.css";
 import Content from "../Content/Content";
 
@@ -11,19 +10,46 @@ class World extends Component {
       loading: true,
       hasError: false,
       error: null,
-      data: {}
+      data: null,
+      worldData: null,
+      lastUpdated: ""
     };
   }
 
   componentDidMount() {
     this.props.closeNav();
+    this._getWorldData();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.country !== this.state.country) {
       this._getData(this.state.country);
     }
+    if (prevState.worldData !== this.state.worldData) {
+      if (this.state.worldData !== null) {
+        this._getLastUpdatedTime(this.state.worldData);
+      }
+    }
   }
+
+  /**
+   * Helper to get last updated time
+   */
+  _getLastUpdatedTime = data => {
+    let today = new Date(data.updated);
+    let date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    let time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date + " " + time;
+    this.setState({
+      lastUpdated: dateTime
+    });
+  };
 
   /**
    * @description Helper to set local state with state value
@@ -49,9 +75,31 @@ class World extends Component {
             loading: false
           });
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
+        //check for errors
+        error => {
+          this.setState({
+            loading: false,
+            hasError: true,
+            error
+          });
+        }
+      );
+  };
+
+  /**
+   *  @description Get all country data as a fallback
+   */
+  _getWorldData = () => {
+    fetch(`https://corona.lmao.ninja/all`)
+      .then(res => res.json())
+      .then(
+        result => {
+          this.setState({
+            worldData: result,
+            loading: false
+          });
+        },
+        //check for errors
         error => {
           this.setState({
             loading: false,
@@ -63,7 +111,9 @@ class World extends Component {
   };
 
   render() {
-    const { loading, data } = this.state;
+    const { loading, data, worldData, lastUpdated } = this.state;
+    const { listOfCountries } = this.props;
+
     return (
       <div className="container-fluid">
         <div className="summary">
@@ -71,22 +121,25 @@ class World extends Component {
             Select country to get data
             <div
               className="field"
-              style={{ width: "200px", marginTop: "20px" }}
+              style={{ width: "300px", marginTop: "20px" }}
             >
               <select
                 className="custom-select"
                 id="sel-cnt"
                 onChange={this.onStateSelect}
               >
-                <option defaultValue>Select Country</option>
-                {COUNTRIES && COUNTRIES.length
-                  ? COUNTRIES.map(option => (
-                      <option key={option.code} value={option.name}>
+                <option defaultValue>Select the country</option>
+                {listOfCountries && listOfCountries.length
+                  ? listOfCountries.map((option, index) => (
+                      <option key={index} value={option.name}>
                         {option.name}
                       </option>
                     ))
                   : null}
               </select>
+              <div className="last-updated">
+                Last Data Update: <strong>{lastUpdated}</strong>
+              </div>
             </div>
           </div>
           <div
@@ -98,7 +151,13 @@ class World extends Component {
               marginTop: "20px"
             }}
           >
-            <Content loading={loading} data={data} />
+            <>
+              {this.state.data !== null ? (
+                <Content loading={loading} data={data} />
+              ) : this.state.worldData !== null ? (
+                <Content loading={loading} data={worldData} />
+              ) : null}
+            </>
           </div>
         </div>
       </div>

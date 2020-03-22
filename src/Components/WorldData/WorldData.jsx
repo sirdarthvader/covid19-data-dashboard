@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import "./Content.css";
-import Card from "../Card/Card";
 
-class Content extends Component {
+export default class WorldData extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   render() {
     let { loading, data } = this.props;
     return (
@@ -17,14 +16,6 @@ class Content extends Component {
           key={1}
           dataLoading={loading}
           value={data.cases}
-          total={data.cases}
-        />
-        <Card
-          header={"Active"}
-          color={"orange"}
-          key={2}
-          dataLoading={loading}
-          value={data.active}
           total={data.cases}
         />
         <Card
@@ -43,18 +34,7 @@ class Content extends Component {
           value={data.recovered}
           total={data.cases}
         />
-        {data.critical ? (
-          <Card
-            header={"Critical"}
-            color={"hotpink"}
-            key={5}
-            dataLoading={loading}
-            value={data.critical}
-            total={data.cases}
-          />
-        ) : null}
       </>
     );
   }
 }
-export default Content;
