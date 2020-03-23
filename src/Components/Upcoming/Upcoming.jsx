@@ -27,6 +27,9 @@ export default class Upcoming extends Component {
           <li className="list-group-item">
             Notifications & advisories (India)
           </li>
+          <li className="list-group-item">
+            Add support for regional language!
+          </li>
         </ul>
       </div>
     );
