@@ -27,6 +27,10 @@ export default class App extends Component {
     this._getWorldData();
     this._getAllCountryData();
   }
+  /**
+   * clean up
+   */
+  componentWillUnmount() {}
 
   componentDidUpdate(prevProps, prevState) {
     //check for all change country data
@@ -80,7 +84,11 @@ export default class App extends Component {
    */
   _closeNav = () => {
     let toggler = document.getElementById("res-mob-tog");
-    toggler.click();
+    let width = window.innerWidth;
+    //aplicable only for mobile view
+    if (width < 700) {
+      toggler.click();
+    }
   };
 
   /**
