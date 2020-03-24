@@ -19,14 +19,16 @@ class Content extends Component {
           value={data.cases}
           total={data.cases}
         />
-        <Card
-          header={"Active"}
-          color={"orange"}
-          key={2}
-          dataLoading={loading}
-          value={data.active}
-          total={data.cases}
-        />
+        {data.active ? (
+          <Card
+            header={"Active"}
+            color={"orange"}
+            key={2}
+            dataLoading={loading}
+            value={data.active}
+            total={data.cases}
+          />
+        ) : null}
         <Card
           header={"Death"}
           color={"death"}
