@@ -7,7 +7,7 @@ import World from "./Components/World/World";
 import Datasource from "./Components/Datasource/Datasource";
 import About from "./Components/About/About";
 import Upcoming from "./Components/Upcoming/Upcoming";
-
+import ReactGA from "react-ga";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -26,11 +26,8 @@ export default class App extends Component {
   componentDidMount() {
     this._getWorldData();
     this._getAllCountryData();
+    this._initialiseGA();
   }
-  /**
-   * clean up
-   */
-  componentWillUnmount() {}
 
   componentDidUpdate(prevProps, prevState) {
     //check for all change country data
@@ -46,6 +43,14 @@ export default class App extends Component {
       }
     }
   }
+
+  /**
+   * Initialise Google analytics
+   */
+  _initialiseGA = () => {
+    ReactGA.initialize("UA-161697051-1");
+    ReactGA.pageview("/");
+  };
 
   /**
    * @description get all country data and make a list of countries
