@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import PulseLoader from "../PulseLoader/PulseLoader";
-import Content from "../Content/Content";
-// import { Card } from "antd";
 import Card from "../Card/Card";
 
 class States extends Component {

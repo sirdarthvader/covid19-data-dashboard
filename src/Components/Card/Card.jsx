@@ -48,15 +48,17 @@ export default class Card extends Component {
                   {valuePercentage.toFixed(2)} % of total cases
                 </div>
               ) : null}
-              <div className="indian-state">
-                {foreign || indian ? (
-                  <div>Total : {foreign + indian}</div>
-                ) : null}
-                {foreign ? <div>Foreign Cases : {foreign}</div> : null}
-                {indian ? <div>Indian Cases : {indian}</div> : null}
-                {discharged ? <div>Discharged : {discharged}</div> : null}
-                {deaths ? <div>Deaths : {deaths}</div> : null}
-              </div>
+              {indian ? (
+                <div className="indian-state">
+                  {foreign || indian ? (
+                    <div>Total : {foreign + indian}</div>
+                  ) : null}
+                  {foreign ? <div>Foreign Cases : {foreign}</div> : null}
+                  {indian ? <div>Indian Cases : {indian}</div> : null}
+                  {discharged ? <div>Discharged : {discharged}</div> : null}
+                  {deaths ? <div>Deaths : {deaths}</div> : null}
+                </div>
+              ) : null}
             </div>
           </>
         )}
