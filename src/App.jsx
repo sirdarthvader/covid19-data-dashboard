@@ -8,6 +8,7 @@ import Datasource from "./Components/Datasource/Datasource";
 import About from "./Components/About/About";
 import Upcoming from "./Components/Upcoming/Upcoming";
 import ReactGA from "react-ga";
+import States from "./Components/States/States";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -187,6 +188,8 @@ export default class App extends Component {
             <About closeNav={this._closeNav} />
           ) : currentView === "upcoming" ? (
             <Upcoming closeNav={this._closeNav} />
+          ) : currentView === "states" ? (
+            <States closeNav={this._closeNav} />
           ) : null}
         </main>
       </div>

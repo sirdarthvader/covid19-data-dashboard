@@ -9,6 +9,9 @@ class Content extends Component {
   }
   render() {
     let { loading, data } = this.props;
+    if (!data && !loading) {
+      return null;
+    }
     return (
       <>
         <Card
@@ -16,8 +19,8 @@ class Content extends Component {
           color={"primary"}
           key={1}
           dataLoading={loading}
-          value={data.cases}
-          total={data.cases}
+          value={data && data.cases}
+          total={data && data.cases}
         />
         {data.active ? (
           <Card
@@ -25,8 +28,8 @@ class Content extends Component {
             color={"orange"}
             key={2}
             dataLoading={loading}
-            value={data.active}
-            total={data.cases}
+            value={data && data.active}
+            total={data && data.cases}
           />
         ) : null}
         <Card
@@ -34,16 +37,16 @@ class Content extends Component {
           color={"death"}
           key={3}
           dataLoading={loading}
-          value={data.deaths}
-          total={data.cases}
+          value={data && data.deaths}
+          total={data && data.cases}
         />
         <Card
           header={"Recovered"}
           color={"green"}
           key={4}
           dataLoading={loading}
-          value={data.recovered}
-          total={data.cases}
+          value={data && data.recovered}
+          total={data && data.cases}
         />
         {data.todayCases ? (
           <Card
@@ -51,8 +54,8 @@ class Content extends Component {
             color={"red"}
             key={5}
             dataLoading={loading}
-            value={data.todayCases}
-            total={data.cases}
+            value={data && data.todayCases}
+            total={data && data.cases}
           />
         ) : null}
         {data.todayDeaths ? (
@@ -61,8 +64,8 @@ class Content extends Component {
             color={"red"}
             key={6}
             dataLoading={loading}
-            value={data.todayDeaths}
-            total={data.cases}
+            value={data && data.todayDeaths}
+            total={data && data.cases}
           />
         ) : null}
 
@@ -72,8 +75,8 @@ class Content extends Component {
             color={"hotpink"}
             key={7}
             dataLoading={loading}
-            value={data.critical}
-            total={data.cases}
+            value={data && data.critical}
+            total={data && data.cases}
           />
         ) : null}
       </>

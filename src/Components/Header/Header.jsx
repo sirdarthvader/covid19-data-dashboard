@@ -58,6 +58,12 @@ export default class Header extends Component {
               <div className="nav-link">India</div>
             </li>
             <li
+              className={current === "states" ? "nav-item active" : "nav-item"}
+              onClick={() => this.changeTabs("states")}
+            >
+              <div className="nav-link">States</div>
+            </li>
+            <li
               className={current === "world" ? "nav-item active" : "nav-item"}
               onClick={() => this.changeTabs("world")}
             >

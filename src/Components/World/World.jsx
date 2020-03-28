@@ -88,7 +88,7 @@ class World extends Component {
                 id="sel-cnt"
                 onChange={this.onStateSelect}
               >
-                <option defaultValue>Select the country</option>
+                <option defaultValue>Select Country</option>
                 {listOfCountries && listOfCountries.length
                   ? listOfCountries.map((option, index) => (
                       <option key={index} value={option.name}>

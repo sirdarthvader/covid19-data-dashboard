@@ -32,31 +32,7 @@ export default class India extends Component {
   componentDidMount() {
     this._getData();
     this.props.closeNav();
-    this.getStateWiseData();
   }
-
-  /**
-   * @description API call to fetch state wise data for all indian states
-   */
-  getStateWiseData = () => {
-    fetch(`https://api.rootnet.in/covid19-in/stats/latest`)
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            indianStates: result.data.regional
-          });
-        },
-        //check for errors
-        error => {
-          this.setState({
-            loading: false,
-            hasError: false,
-            error
-          });
-        }
-      );
-  };
 
   /**
    * @param {*} data this is the data returned by the API

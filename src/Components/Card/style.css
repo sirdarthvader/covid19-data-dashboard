@@ -13,3 +13,9 @@
   width: 60%;
   font-size: 12px;
 }
+
+.indian-state {
+  display: flex;
+  flex-direction: column;
+  color: #b58900;
+}
