@@ -39,8 +39,8 @@ export default class About extends Component {
               </a>
             </p>
             <p className="lead">
-              If you are an amazing developer, who likes to build things for
-              internet. Feel free to connect on Github.
+              If you consider yourself a ninja developer, someone who likes to
+              build things for internet. Feel free to connect on Github.
             </p>
           </div>
         </div>
