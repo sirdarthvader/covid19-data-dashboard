@@ -17,6 +17,7 @@ class States extends Component {
 
   componentDidMount() {
     this.getStateWiseData();
+    this.props.closeNav();
   }
 
   componentDidUpdate(prevProps, prevState) {
