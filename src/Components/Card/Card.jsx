@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import "./style.css";
 import PulseLoader from "../PulseLoader/PulseLoader";
 export default class Card extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
   render() {
     let {
       color,
@@ -16,10 +12,13 @@ export default class Card extends Component {
       deaths,
       discharged,
       foreign,
-      indian
+      indian,
+      totalCases,
     } = this.props;
+
     let valuePercentage = (value / total) * 100;
     foreign = String(foreign);
+    value = value && Intl.NumberFormat("en-IN").format(value);
     return (
       <div
         className={`card mr-3 ${color} mb-3`}
@@ -28,11 +27,11 @@ export default class Card extends Component {
             ? {
                 maxWidth: "18rem",
                 minWidth: "18rem",
-                minHeight: "18rem"
+                minHeight: "18rem",
               }
             : {
                 maxWidth: "18rem",
-                minWidth: "18rem"
+                minWidth: "18rem",
               }
         }
       >
@@ -50,9 +49,7 @@ export default class Card extends Component {
               ) : null}
               {indian ? (
                 <div className="indian-state">
-                  {foreign || indian ? (
-                    <div>Total : {Number(foreign) + indian}</div>
-                  ) : null}
+                  {totalCases ? <div>Total : {totalCases}</div> : null}
                   {foreign ? <div>Foreign Cases : {foreign}</div> : null}
                   {indian ? <div>Indian Cases : {indian}</div> : null}
                   {discharged ? <div>Discharged : {discharged}</div> : null}

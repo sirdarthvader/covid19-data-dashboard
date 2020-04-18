@@ -12,7 +12,7 @@ class World extends Component {
       hasError: false,
       error: null,
       data: null,
-      lastUpdated: ""
+      lastUpdated: "",
     };
   }
 
@@ -29,7 +29,7 @@ class World extends Component {
     //check for change in coming api data
     if (prevProps.worldData !== this.props.worldData) {
       this.setState({
-        loading: false
+        loading: false,
       });
     }
   }
@@ -42,29 +42,29 @@ class World extends Component {
     let country = document.getElementById("sel-cnt").value;
     this.setState({
       country,
-      loading: true
+      loading: true,
     });
   };
 
   /**
    * @param {*} country this will be used to fetch data related to any country in the world
    */
-  _getData = country => {
-    fetch(`https://corona.lmao.ninja/countries/${country}`)
-      .then(res => res.json())
+  _getData = (country) => {
+    fetch(`https://corona.lmao.ninja/v2/countries/${country}`)
+      .then((res) => res.json())
       .then(
-        result => {
+        (result) => {
           this.setState({
             data: result,
-            loading: false
+            loading: false,
           });
         },
         //check for errors
-        error => {
+        (error) => {
           this.setState({
             loading: false,
             hasError: true,
-            error
+            error,
           });
         }
       );
@@ -100,7 +100,7 @@ class World extends Component {
             </div>
           </div>
           <div className="last-updated">
-            Last Data Update:{" "}
+            Latest Update As Of:&nbsp;
             <strong className="yellow-background"> {lastUpdated}</strong>
           </div>
           <div
@@ -109,7 +109,7 @@ class World extends Component {
               display: "flex",
               flexWrap: "wrap",
               justifyContent: "center",
-              marginTop: "20px"
+              marginTop: "20px",
             }}
           >
             <>
@@ -124,7 +124,7 @@ class World extends Component {
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
-                    width: "100%"
+                    width: "100%",
                   }}
                 >
                   <div className="first yellow-background">
@@ -135,7 +135,7 @@ class World extends Component {
                     style={{
                       display: "flex",
                       justifyContent: "center",
-                      width: "100%"
+                      width: "100%",
                     }}
                   >
                     <PulseLoader width={"200px"} height={"200px"} mr={"20px"} />

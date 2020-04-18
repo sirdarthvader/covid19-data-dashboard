@@ -20,7 +20,7 @@ export default class App extends Component {
       worldData: null,
       lastUpdated: "",
       allCountryData: [],
-      listOfCountries: []
+      listOfCountries: [],
     };
   }
 
@@ -57,7 +57,7 @@ export default class App extends Component {
    * @description get all country data and make a list of countries
    * @param {array} data array of all the countries effected so far
    */
-  _listCountries = data => {
+  _listCountries = (data) => {
     let country_arr = data.map((item, index) => {
       let country_obj = {};
       let name = item.country;
@@ -67,7 +67,7 @@ export default class App extends Component {
       return country_obj;
     });
     this.setState({
-      listOfCountries: country_arr
+      listOfCountries: country_arr,
     });
   };
 
@@ -75,9 +75,9 @@ export default class App extends Component {
    * @description Helper to get current selected tab from navbar
    * @param {*} tab current screen to be viewed
    */
-  _getCurrentTab = tab => {
+  _getCurrentTab = (tab) => {
     this.setState({
-      currentView: tab
+      currentView: tab,
     });
     if (tab === "home") {
       this._closeNav();
@@ -101,21 +101,21 @@ export default class App extends Component {
    * @description get data for all countries effecte by coronavirus
    */
   _getAllCountryData = () => {
-    fetch(`https://corona.lmao.ninja/countries`)
-      .then(res => res.json())
+    fetch(`https://corona.lmao.ninja/v2/countries`)
+      .then((res) => res.json())
       .then(
-        result => {
+        (result) => {
           this.setState({
             allCountryData: result,
-            loading: false
+            loading: false,
           });
         },
         //check for errors
-        error => {
+        (error) => {
           this.setState({
             loading: false,
             hasError: true,
-            error
+            error,
           });
         }
       );
@@ -125,21 +125,21 @@ export default class App extends Component {
    *  @description Get all country data as a fallback
    */
   _getWorldData = () => {
-    fetch(`https://corona.lmao.ninja/all`)
-      .then(res => res.json())
+    fetch(`https://corona.lmao.ninja/v2/all`)
+      .then((res) => res.json())
       .then(
-        result => {
+        (result) => {
           this.setState({
             worldData: result,
-            loading: false
+            loading: false,
           });
         },
         //check for errors
-        error => {
+        (error) => {
           this.setState({
             loading: false,
             hasError: true,
-            error
+            error,
           });
         }
       );
@@ -149,7 +149,7 @@ export default class App extends Component {
    * Helper to get last updated time
    * @param {dateObject} dateobject returned by API
    */
-  _getLastUpdatedTime = data => {
+  _getLastUpdatedTime = (data) => {
     let today = new Date(data.updated);
     let date =
       today.getDate() +
@@ -161,7 +161,7 @@ export default class App extends Component {
       today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     let dateTime = date + " " + time;
     this.setState({
-      lastUpdated: dateTime
+      lastUpdated: dateTime,
     });
   };
 

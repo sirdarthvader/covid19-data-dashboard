@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Card from "../Card/Card";
 
 export default class WorldData extends Component {
   constructor(props) {

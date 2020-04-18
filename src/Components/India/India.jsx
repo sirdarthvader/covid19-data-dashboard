@@ -10,7 +10,7 @@ export default class India extends Component {
       data: "",
       loading: true,
       hasError: false,
-      error: null
+      error: null,
     };
   }
 
@@ -38,7 +38,7 @@ export default class India extends Component {
    * @param {*} data this is the data returned by the API
    * this data would be taken and converted from an object to an array
    */
-  _arrangeData = data => {
+  _arrangeData = (data) => {
     let dataArr = [];
     for (let [key, value] of Object.entries(data)) {
       let currObj = {};
@@ -47,7 +47,7 @@ export default class India extends Component {
     }
     this.setState({
       arrangedData: dataArr,
-      loading: false
+      loading: false,
     });
   };
 
@@ -55,22 +55,22 @@ export default class India extends Component {
    * @param {*} * this will be used to fetch data related to Indian states
    */
   _getData = () => {
-    fetch("https://corona.lmao.ninja/countries/india")
-      .then(res => res.json())
+    fetch("https://corona.lmao.ninja/v2/countries/india")
+      .then((res) => res.json())
       .then(
-        result => {
+        (result) => {
           this.setState({
-            data: result
+            data: result,
           });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        error => {
+        (error) => {
           this.setState({
             loading: false,
             hasError: true,
-            error
+            error,
           });
         }
       );
@@ -87,7 +87,7 @@ export default class India extends Component {
           </div>
         ) : null}
         <div className="last-updated">
-          Last Data Update:{" "}
+          Latest Data As Of: &nbsp;
           <strong className="yellow-background"> {lastUpdated}</strong>
         </div>
         <div
@@ -96,7 +96,7 @@ export default class India extends Component {
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
-            marginTop: "50px"
+            marginTop: "50px",
           }}
         >
           <Content loading={loading} data={data} />

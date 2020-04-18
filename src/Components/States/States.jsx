@@ -8,10 +8,17 @@ class States extends Component {
       loading: true,
       hasError: null,
       error: null,
+      formatted: false,
       indianStates: [],
       stateData: [],
+      location: "",
       selectedState: "",
-      selected: ""
+      selected: "",
+      totalCases: "",
+      foreignCases: "",
+      indianCases: "",
+      discharged: "",
+      deaths: "",
     };
   }
 
@@ -35,26 +42,57 @@ class States extends Component {
   /**
    * @description see selected state and show respective card
    */
-  _showStateCard = data => {
+  _showStateCard = (data) => {
     const { indianStates } = this.state;
-    let selectState = indianStates.filter(state => data === state.loc);
+    let selectState = indianStates.filter((state) => data === state.loc);
+    this.clubNumber(selectState[0]);
+  };
+
+  /**
+   * @description helper to club total cases
+   * @param {data} object Object containing current selected state value
+   */
+  clubNumber = (data) => {
+    let totalCases, foreignCases, indianCases, discharged, deaths;
+    totalCases = this.formatNumber(
+      data.confirmedCasesIndian + data.confirmedCasesForeign
+    );
+    foreignCases = this.formatNumber(data.confirmedCasesForeign);
+    indianCases = this.formatNumber(data.confirmedCasesIndian);
+    discharged = this.formatNumber(data.discharged);
+    deaths = this.formatNumber(data.deaths);
     this.setState({
-      selected: selectState[0]
+      totalCases,
+      foreignCases,
+      indianCases,
+      discharged,
+      deaths,
+      location: data.loc,
+      formatted: true,
     });
   };
 
   /**
-   * @description get received data and add markers
+   * @description Helper to format given numbers in indian number system
+   * @argument Number works only when supplied data type is of type Number
    */
-  _sortData = data => {
+  formatNumber = (num) => {
+    return Intl.NumberFormat("en-IN").format(num);
+  };
+
+  /**
+   * @description get received data and add markers
+   * @argument {data} Array accepts an array of states data
+   */
+  _sortData = (data) => {
     let updated_data = data.map((state, index) => {
       return {
         id: index + 1,
-        ...state
+        ...state,
       };
     });
     this.setState({
-      stateData: updated_data
+      stateData: updated_data,
     });
   };
 
@@ -63,19 +101,19 @@ class States extends Component {
    */
   getStateWiseData = () => {
     fetch(`https://api.rootnet.in/covid19-in/stats/latest`)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
-        result => {
+        (result) => {
           this.setState({
-            indianStates: result.data.regional
+            indianStates: result.data.regional,
           });
         },
         //check for errors
-        error => {
+        (error) => {
           this.setState({
             loading: false,
             hasError: false,
-            error
+            error,
           });
         }
       );
@@ -84,15 +122,25 @@ class States extends Component {
   /**
    * @description for selecting state
    */
-  onStateSelect = data => {
+  onStateSelect = (data) => {
     let state = document.getElementById("sel-sta").value;
     this.setState({
-      selectedState: state
+      selectedState: state,
+      formatted: false,
     });
   };
 
   render() {
-    const { indianStates, selected } = this.state;
+    const {
+      indianStates,
+      formatted,
+      totalCases,
+      indianCases,
+      foreignCases,
+      discharged,
+      deaths,
+      location,
+    } = this.state;
     return (
       <div className="container-fluid">
         <div className="summary">
@@ -105,7 +153,7 @@ class States extends Component {
               <select
                 className="custom-select"
                 id="sel-sta"
-                onChange={id => this.onStateSelect(id)}
+                onChange={(id) => this.onStateSelect(id)}
               >
                 <option defaultValue>Select State</option>
                 {indianStates && indianStates.length
@@ -125,17 +173,18 @@ class States extends Component {
               display: "flex",
               flexWrap: "wrap",
               justifyContent: "center",
-              marginTop: "20px"
+              marginTop: "20px",
             }}
           >
             <>
-              {selected ? (
+              {formatted ? (
                 <Card
-                  header={selected.loc}
-                  deaths={selected.deaths}
-                  discharged={selected.discharged}
-                  foreign={selected.confirmedCasesForeign}
-                  indian={selected.confirmedCasesIndian}
+                  header={location}
+                  deaths={deaths}
+                  discharged={discharged}
+                  foreign={foreignCases}
+                  indian={indianCases}
+                  totalCases={totalCases}
                 />
               ) : null}
             </>
