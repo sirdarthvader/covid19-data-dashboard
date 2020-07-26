@@ -21,7 +21,7 @@ export default class About extends Component {
               <a
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://github.com/ashishcodes4"
+                href="https://github.com/sirdarthvader"
               >
                 Ashish Singh
               </a>{" "}
