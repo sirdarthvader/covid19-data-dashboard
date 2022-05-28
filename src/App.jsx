@@ -1,14 +1,17 @@
-import React, { Component } from "react";
-import "./App.css";
-import Header from "./Components/Header/Header";
-import Jumbotron from "./Components/Jumbotron/Jumbotron";
-import India from "./Components/India/India";
-import World from "./Components/World/World";
-import Datasource from "./Components/Datasource/Datasource";
-import About from "./Components/About/About";
-import Upcoming from "./Components/Upcoming/Upcoming";
-import ReactGA from "react-ga";
-import States from "./Components/States/States";
+import React, { Component } from 'react';
+import './App.css';
+import Header from './Components/Header/Header';
+import Jumbotron from './Components/Jumbotron/Jumbotron';
+import India from './Components/India/India';
+import World from './Components/World/World';
+import Datasource from './Components/Datasource/Datasource';
+import About from './Components/About/About';
+import Upcoming from './Components/Upcoming/Upcoming';
+import States from './Components/States/States';
+
+/**
+ * @todo Refactor this component to be a functional component
+ */
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -16,9 +19,9 @@ export default class App extends Component {
       hasError: false,
       loading: true,
       error: {},
-      currentView: "home",
+      currentView: 'home',
       worldData: null,
-      lastUpdated: "",
+      lastUpdated: '',
       allCountryData: [],
       listOfCountries: [],
     };
@@ -30,14 +33,17 @@ export default class App extends Component {
     this._initialiseGA();
   }
 
+  /**
+   * @param {Object} prevProps
+   * @param {Object} prevState
+   */
   componentDidUpdate(prevProps, prevState) {
-    //check for all change country data
     if (prevState.allCountryData !== this.state.allCountryData) {
       if (this.state.allCountryData.length) {
         this._listCountries(this.state.allCountryData);
       }
     }
-    //check for change in world data
+
     if (prevState.worldData !== this.state.worldData) {
       if (this.state.worldData !== null) {
         this._getLastUpdatedTime(this.state.worldData);
@@ -46,15 +52,17 @@ export default class App extends Component {
   }
 
   /**
-   * Initialise Google analytics
+   * @function _initialiseGA Initialise Google analytics
+   * @todo After updating the outdated versions for react and react-dom,
+   * revist this and look for another library or tool that can do solve this problem.
    */
   _initialiseGA = () => {
-    ReactGA.initialize("UA-161697051-1");
-    ReactGA.pageview("/");
+    // ReactGA.initialize('UA-161697051-1');
+    // ReactGA.pageview('/');
   };
 
   /**
-   * @description get all country data and make a list of countries
+   * @function _listCountries get all country data and make a list of countries
    * @param {array} data array of all the countries effected so far
    */
   _listCountries = (data) => {
@@ -73,23 +81,23 @@ export default class App extends Component {
 
   /**
    * @description Helper to get current selected tab from navbar
-   * @param {*} tab current screen to be viewed
+   * @param {string} tab current screen to be viewed
    */
   _getCurrentTab = (tab) => {
     this.setState({
       currentView: tab,
     });
-    if (tab === "home") {
+    if (tab === 'home') {
       this._closeNav();
     }
   };
 
   /**
-   * @description check if the responsive navbar is switched visible,
+   * @function _closeNav check if the responsive navbar is visible,
    *  if it is then find it and close it.
    */
   _closeNav = () => {
-    let toggler = document.getElementById("res-mob-tog");
+    let toggler = document.getElementById('res-mob-tog');
     let width = window.innerWidth;
     //aplicable only for mobile view
     if (width < 700) {
@@ -98,7 +106,7 @@ export default class App extends Component {
   };
 
   /**
-   * @description get data for all countries effecte by coronavirus
+   * @function _getAllCountryData fetch data for all the mentioned countries from a pre-defined list.
    */
   _getAllCountryData = () => {
     fetch(`https://corona.lmao.ninja/v2/countries`)
@@ -110,7 +118,7 @@ export default class App extends Component {
             loading: false,
           });
         },
-        //check for errors
+        //check for errors, if errors, update error state
         (error) => {
           this.setState({
             loading: false,
@@ -122,7 +130,8 @@ export default class App extends Component {
   };
 
   /**
-   *  @description Get all country data as a fallback
+   *  @function _getWorldData fetch data for all the countries available,
+   * to serve as a fallback and update state with either country data or the error message
    */
   _getWorldData = () => {
     fetch(`https://corona.lmao.ninja/v2/all`)
@@ -134,7 +143,7 @@ export default class App extends Component {
             loading: false,
           });
         },
-        //check for errors
+        //check for errors, if exists, update error state
         (error) => {
           this.setState({
             loading: false,
@@ -146,20 +155,21 @@ export default class App extends Component {
   };
 
   /**
-   * Helper to get last updated time
-   * @param {dateObject} dateobject returned by API
+   * @function _getLastUpdatedTime Helper to get last updated timestamp for the fetched data and update state
+   * @param {Object} dateobject returned by API
    */
   _getLastUpdatedTime = (data) => {
     let today = new Date(data.updated);
     let date =
       today.getDate() +
-      "-" +
+      '-' +
       (today.getMonth() + 1) +
-      "-" +
+      '-' +
       today.getFullYear();
     let time =
-      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = date + " " + time;
+      today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+    let dateTime = `${date} ${time}`;
     this.setState({
       lastUpdated: dateTime,
     });
@@ -171,24 +181,24 @@ export default class App extends Component {
       <div className="App">
         <Header getCurrentTab={this._getCurrentTab} />
         <main className="main">
-          {currentView === "home" ? (
+          {currentView === 'home' ? (
             <Jumbotron />
-          ) : currentView === "india" ? (
+          ) : currentView === 'india' ? (
             <India closeNav={this._closeNav} lastUpdated={lastUpdated} />
-          ) : currentView === "world" ? (
+          ) : currentView === 'world' ? (
             <World
               closeNav={this._closeNav}
               listOfCountries={listOfCountries}
               worldData={worldData}
               lastUpdated={lastUpdated}
             />
-          ) : currentView === "source" ? (
+          ) : currentView === 'source' ? (
             <Datasource closeNav={this._closeNav} />
-          ) : currentView === "about" ? (
+          ) : currentView === 'about' ? (
             <About closeNav={this._closeNav} />
-          ) : currentView === "upcoming" ? (
+          ) : currentView === 'upcoming' ? (
             <Upcoming closeNav={this._closeNav} />
-          ) : currentView === "states" ? (
+          ) : currentView === 'states' ? (
             <States closeNav={this._closeNav} />
           ) : null}
         </main>

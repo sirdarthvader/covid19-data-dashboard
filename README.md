@@ -1,11 +1,14 @@
 <p align="center">
-<img src="https://gist.githubusercontent.com/sirdarthvader/2ef4f28a286025d7d5a94c041e5fcb42/raw/e1bfbb45f740a63d5e2fdd2501290283179db972/logo.png" width="100%">
+<img src="https://user-images.githubusercontent.com/28031165/170801827-6eb07b5e-87ad-445f-a72e-e5ef52560427.png" width="50%">
 </p>
 
+This project is only the client part of the app available on public url "TBD". Thi project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Refer to the "_package.json_" file on the root of the app to know details about the packages and dependencies.
 
+## Data Source
 
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+APIs are a not a part of this project. This project relies on an open source project to maintain the APIs used across the app.
+[Link to APIs Project](https://github.com/disease-sh/API)
 
 ## Available Scripts
 
@@ -34,42 +37,48 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Contributing
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+If you're new to contributing to Open Source, [this guide](https://guides.github.com/activities/contributing-to-open-source/) can help you get started. Please check out the [contribution guide](https://github.com/covid19india/covid19india-react/blob/master/CONTRIBUTING.md) for more details on how issues and pull requests work.
 
-### Analyzing the Bundle Size
+# Contributing Guidelines
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+First off, thanks for taking the time to contribute! 😄
 
-### Making a Progressive Web App
+Contributions are handled in the form of Pull Requests. You fork this repository, create a new branch, make relevant changes, and submit a Pull Request – once that's done we'll be able to review your PRs and merge them to the master branch.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Always submit a PR against a "Claimed Issue" that's been assigned to you. If an issue doesn't exist, please raise one first and wait for it to be labelled as "Available", and then have it assigned to you. PRs without having accepted issues mentioned will be closed.
 
-### Advanced Configuration
+## Process Flow
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+- When a new issue is created, "**Status: Review Needed**" and "**Type: Bug**"or "**Type: Enhancement**" label will be added to it
+- Contributors should periodically check for "**Status: Review Needed**" and add appropriate Priority and Status labels if and when needed
+- If the issue is clear, set the status label as "**Status: Available**"
+- People looking to contribute, filter issues by "**Status:Available**" and comment "/claim" on the issue they would like to be assigned to work on
+- Finally submit the pull request
 
-### Deployment
+## Formatting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Format your PR titles likewise:
 
-### `npm run build` fails to minify
+> [Tag]: Describe change in present tense
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Tag can be:
+
+- Feat (new feature)
+- Fix (bug fix)
+- Refactor (refactoring code)
+- Style (formatting, no code change)
+- Doc (changes to documentation)
+- Test (adding or refactoring tests; no production code change)
+
+Remember to:
+
+- Capitalize the subject line
+- Use the imperative mood in the subject line
