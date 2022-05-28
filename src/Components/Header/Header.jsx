@@ -1,11 +1,14 @@
-import React, { Component } from "react";
-import "./Header.css";
+import React, { Component } from 'react';
+import './Header.css';
 
+/**
+ * @todo Refactor this component to be a functional component
+ */
 export default class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: "home"
+      current: 'home',
     };
   }
 
@@ -14,10 +17,10 @@ export default class Header extends Component {
    * @param {*} tab provide name of tab for navigation,
    * same will be passed back to parent component
    */
-  changeTabs = tab => {
+  changeTabs = (tab) => {
     this.setState(
       {
-        current: tab
+        current: tab,
       },
       () => {
         this.props.getCurrentTab(tab);
@@ -25,13 +28,11 @@ export default class Header extends Component {
     );
   };
 
-  changeTabs;
-
   render() {
     const { current } = this.state;
     return (
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark covid-custom-navbar">
-        <div className="navbar-brand" onClick={() => this.changeTabs("home")}>
+        <div className="navbar-brand" onClick={() => this.changeTabs('home')}>
           <span className="green">
             COVID<span className="red"> 19</span>
           </span>
@@ -52,40 +53,40 @@ export default class Header extends Component {
         <div className="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul className="navbar-nav mr-auto">
             <li
-              className={current === "india" ? "nav-item active" : "nav-item"}
-              onClick={() => this.changeTabs("india")}
+              className={current === 'india' ? 'nav-item active' : 'nav-item'}
+              onClick={() => this.changeTabs('india')}
             >
               <div className="nav-link">India</div>
             </li>
             <li
-              className={current === "states" ? "nav-item active" : "nav-item"}
-              onClick={() => this.changeTabs("states")}
+              className={current === 'states' ? 'nav-item active' : 'nav-item'}
+              onClick={() => this.changeTabs('states')}
             >
               <div className="nav-link">States</div>
             </li>
             <li
-              className={current === "world" ? "nav-item active" : "nav-item"}
-              onClick={() => this.changeTabs("world")}
+              className={current === 'world' ? 'nav-item active' : 'nav-item'}
+              onClick={() => this.changeTabs('world')}
             >
               <div className="nav-link">World</div>
             </li>
             <li
-              className={current === "source" ? "nav-item active" : "nav-item"}
-              onClick={() => this.changeTabs("source")}
+              className={current === 'source' ? 'nav-item active' : 'nav-item'}
+              onClick={() => this.changeTabs('source')}
             >
               <div className="nav-link">Source</div>
             </li>
             <li
               className={
-                current === "upcoming" ? "nav-item active" : "nav-item"
+                current === 'upcoming' ? 'nav-item active' : 'nav-item'
               }
-              onClick={() => this.changeTabs("upcoming")}
+              onClick={() => this.changeTabs('upcoming')}
             >
               <div className="nav-link">Upcoming!!</div>
             </li>
             <li
-              className={current === "about" ? "nav-item active" : "nav-item"}
-              onClick={() => this.changeTabs("about")}
+              className={current === 'about' ? 'nav-item active' : 'nav-item'}
+              onClick={() => this.changeTabs('about')}
             >
               <div className="nav-link">About</div>
             </li>
